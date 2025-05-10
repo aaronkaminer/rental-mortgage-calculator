@@ -157,6 +157,19 @@ function RentalVsMortgageCalculator() {
             </div>
             
             <div className="mb-4">
+              <label className="block text-sm font-medium mb-1">Mortgage Term (years)</label>
+              <input
+                type="number"
+                value={mortgageTerm}
+                onChange={(e) => setMortgageTerm(Number(e.target.value))}
+                className="block w-full border p-2"
+              />
+              <div className="text-xs text-gray-500 mt-1">
+                Standard terms: 30 years (common), 15 years (lower rate, higher payment)
+              </div>
+            </div>
+            
+            <div className="mb-4">
               <label className="block text-sm font-medium mb-1">Down Payment (%)</label>
               <input
                 type="number"
@@ -179,8 +192,55 @@ function RentalVsMortgageCalculator() {
                   step="0.05"
                   className="block w-full border p-2"
                 />
+                <div className="text-xs text-gray-500 mt-1">
+                  Orlando PMI: 0.5-1.5% annually. For a $300,000 loan, PMI costs $125-$375/month.
+                  PMI can be removed at 20% equity, automatically terminates at 22%.
+                </div>
               </div>
             )}
+            
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-1">Closing Costs (% of price)</label>
+              <input
+                type="number"
+                value={closingCosts}
+                onChange={(e) => setClosingCosts(Number(e.target.value))}
+                step="0.1"
+                className="block w-full border p-2"
+              />
+              <div className="text-xs text-gray-500 mt-1">
+                Orlando closing costs for buying typically range from 2-5% (avg. 2.3%), but are set to 0% by default since these may be covered by seller concessions, lender credits, or special programs. Adjust based on your situation.
+                <ul className="list-disc pl-5 mt-1">
+                  <li>Loan origination: 0.5-1% of loan</li>
+                  <li>Appraisal/inspection: $300-600</li>
+                  <li>Title insurance/search: varies</li>
+                  <li>Recording fees: 0.2-0.5%</li>
+                  <li>Prepaid expenses: 1-2%</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-1">Selling Costs (% of future value)</label>
+              <input
+                type="number"
+                value={sellingClosingCosts}
+                onChange={(e) => setSellingClosingCosts(Number(e.target.value))}
+                step="0.1"
+                className="block w-full border p-2"
+              />
+              <div className="text-xs text-gray-500 mt-1">
+                In Orlando, average home selling costs typically range from 7% to 10% of the home's sale price.
+                <ul className="list-disc pl-5 mt-1">
+                  <li>Real Estate Agent Commissions: 5-6% (most common)</li>
+                  <li>Closing Costs (Title, Escrow): 1-3%</li>
+                  <li>Transfer Taxes / Recording Fees: 0.5-1%</li>
+                </ul>
+                <div className="mt-1">
+                  For budgeting purposes, planning around 8-9% of the home's sale price is considered realistic and conservative.
+                </div>
+              </div>
+            </div>
             
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1">Property Tax Rate (%/year)</label>
@@ -191,6 +251,9 @@ function RentalVsMortgageCalculator() {
                 step="0.01"
                 className="block w-full border p-2"
               />
+              <div className="text-xs text-gray-500 mt-1">
+                Orlando property tax rate: approx. 0.89% of assessed value
+              </div>
             </div>
             
             <div className="mb-4">
@@ -206,6 +269,9 @@ function RentalVsMortgageCalculator() {
                   className="pl-7 block w-full border p-2"
                 />
               </div>
+              <div className="text-xs text-gray-500 mt-1">
+                Florida avg: $3,600/year (higher due to hurricane risk)
+              </div>
             </div>
             
             <div className="mb-4">
@@ -220,6 +286,20 @@ function RentalVsMortgageCalculator() {
                   onChange={(e) => setHoaFees(Number(e.target.value))}
                   className="pl-7 block w-full border p-2"
                 />
+              </div>
+            </div>
+            
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-1">Annual Maintenance (% of value)</label>
+              <input
+                type="number"
+                value={maintenanceCost}
+                onChange={(e) => setMaintenanceCost(Number(e.target.value))}
+                step="0.1"
+                className="block w-full border p-2"
+              />
+              <div className="text-xs text-gray-500 mt-1">
+                Orlando new homes: 0.5-1%. Older homes: 1.5-2%.
               </div>
             </div>
           </div>
@@ -267,6 +347,9 @@ function RentalVsMortgageCalculator() {
                   className="pl-7 block w-full border p-2"
                 />
               </div>
+              <div className="text-xs text-gray-500 mt-1">
+                Renters insurance in Orlando typically costs $15-30 per month ($180-360 per year), with $300/year being a common average. Prices depend on coverage limits, deductibles, location, and personal property value. Most landlords require proof of renters insurance upon lease signing.
+              </div>
             </div>
             
             <h2 className="text-xl font-semibold mb-4 mt-6">General Assumptions</h2>
@@ -290,6 +373,9 @@ function RentalVsMortgageCalculator() {
                 step="0.1"
                 className="block w-full border p-2"
               />
+              <div className="text-xs text-gray-500 mt-1">
+                Orlando: Conservative 2-3%, Realistic 4-5%, Optimistic 6-8%
+              </div>
             </div>
             
             <div className="mb-4">
@@ -301,6 +387,9 @@ function RentalVsMortgageCalculator() {
                 step="0.1"
                 className="block w-full border p-2"
               />
+              <div className="text-xs text-gray-500 mt-1">
+                Orlando 2024: 0.9% (recent), 3-10% (typical), 0-5% (renewals)
+              </div>
             </div>
           </div>
         </div>
@@ -351,8 +440,37 @@ function RentalVsMortgageCalculator() {
             </div>
             
             <div className="mb-2 pt-2 border-t border-gray-200">
+              <span className="font-medium">Sale Transaction Breakdown:</span>
+            </div>
+            
+            <div className="mb-2">
+              <span className="text-sm text-gray-600">Sale Price (Future Home Value):</span> 
+              <span className="float-right">{formatCurrency(currentHomeValue)}</span>
+            </div>
+            
+            <div className="mb-2">
+              <span className="text-sm text-gray-600">Outstanding Mortgage Balance:</span> 
+              <span className="float-right">-{formatCurrency(remainingLoanBalance)}</span>
+            </div>
+            
+            <div className="mb-2">
+              <span className="text-sm text-gray-600">Selling Costs ({sellingClosingCosts}%):</span> 
+              <span className="float-right">-{formatCurrency(sellingCostsAmount)}</span>
+            </div>
+            
+            <div className="mb-2 pt-1 border-t border-gray-200">
               <span className="font-medium">Net Proceeds from Sale:</span> 
               <span className="float-right">{formatCurrency(netEquityAfterSelling)}</span>
+            </div>
+            
+            <div className="mb-2">
+              <span className="text-sm text-gray-600">Initial Investment (Down Payment):</span> 
+              <span className="float-right">-{formatCurrency(downPaymentAmount)}</span>
+            </div>
+            
+            <div className="mb-2 pt-1 border-t border-gray-200">
+              <span className="font-medium">Net Gain from Home Ownership:</span> 
+              <span className="float-right">{formatCurrency(netEquityAfterSelling - downPaymentAmount)}</span>
             </div>
             
             <div className="mt-4 pt-2 border-t border-gray-200 font-bold">
@@ -461,14 +579,36 @@ function RentalVsMortgageCalculator() {
             </div>
             
             <div className="mt-6 pt-2 border-t border-gray-200">
-              <h3 className="text-lg font-medium mb-2">Bottom Line:</h3>
+              <h3 className="text-lg font-medium mb-2">Financial Summary</h3>
+              
+              <div className="mb-2">
+                <strong>If you buy:</strong>
+                <ul className="list-disc pl-5 mt-1 text-sm">
+                  <li>You will have paid {formatCurrency(totalCostsBuying)} total over {timeframeMonths} months</li>
+                  <li>Sale price of home: {formatCurrency(currentHomeValue)}</li>
+                  <li>After paying off remaining mortgage ({formatCurrency(remainingLoanBalance)}) and covering selling costs ({formatCurrency(sellingCostsAmount)}), you'll walk away with {formatCurrency(netEquityAfterSelling)}</li>
+                  <li>Net gain from home ownership: {formatCurrency(netEquityAfterSelling - downPaymentAmount)} compared to your initial down payment of {formatCurrency(downPaymentAmount)}</li>
+                </ul>
+              </div>
+              
+              <div className="mb-2">
+                <strong>If you rent:</strong>
+                <ul className="list-disc pl-5 mt-1 text-sm">
+                  <li>You will have paid {formatCurrency(totalCostsRenting)} total</li>
+                  <li>You will get back your {formatCurrency(securityDepositAmount)} security deposit</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="mt-4 pt-2 border-t border-gray-200 font-bold text-lg">
+              <div className="mb-2">Bottom Line:</div>
               {differenceInNetCost > 0 ? (
                 <div className="bg-blue-100 p-2 rounded">
-                  <strong>Buying is {formatCurrency(Math.abs(differenceInNetCost))} cheaper over {timeframeMonths} months.</strong>
+                  Buying is {formatCurrency(Math.abs(differenceInNetCost))} cheaper over {timeframeMonths} months.
                 </div>
               ) : (
                 <div className="bg-green-100 p-2 rounded">
-                  <strong>Renting is {formatCurrency(Math.abs(differenceInNetCost))} cheaper over {timeframeMonths} months.</strong>
+                  Renting is {formatCurrency(Math.abs(differenceInNetCost))} cheaper over {timeframeMonths} months.
                 </div>
               )}
             </div>
