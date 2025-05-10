@@ -10,24 +10,9 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
     @media print {
-      /* Hide UI elements */
       button { display: none; }
       body { background-color: white; }
       .container { max-width: 100%; margin: 0; padding: 0; }
-      
-      /* Page breaks */
-      .page-break { page-break-after: always; break-after: page; }
-      .print-section { page-break-inside: avoid; break-inside: avoid; }
-      
-      /* Force show expanded areas */
-      .expanded-for-print { display: block !important; }
-      
-      /* Adjust margins and spacing */
-      body { margin: 0; padding: 0; }
-      .print-margin { margin: 20px; }
-      
-      /* Ensure crisp text */
-      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
     }
   </style>
 </head>
